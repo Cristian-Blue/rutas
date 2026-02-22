@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ruta/presentation/screen/despido/despido_screen.dart';
-import 'package:ruta/presentation/screen/saludo/saludo_screen.dart';
+import 'package:ruta/config/router/router.dart';
+import 'package:ruta/presentation/widget/drawer/drawer_widget.dart';
+import 'package:ruta/presentation/widget/lista/lista_menu_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,27 +9,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text('Saludo'),
-            subtitle: Text('Esto es un redireccionamiento como modal a saludo'),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SaludoScreen()),
-            ),
-          ),
-          ListTile(
-            title: Text('Despido'),
-            subtitle: Text(
-              'Esto es un redireccionamiento como modal a despido',
-            ),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const DespidoScreen()),
-            ),
-          ),
-        ],
+      appBar: AppBar(title: const Text('Ruta'), centerTitle: true),
+      drawer: DrawerWidget(),
+      body: ListView.builder(
+        itemCount: routes.length,
+        itemBuilder: (context, index) => ListaMenuWidget(route: routes[index]),
       ),
     );
   }
